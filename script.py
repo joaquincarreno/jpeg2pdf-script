@@ -20,12 +20,13 @@ for dir in root[1]:
     archivos = next(walk(dirpath), (None, None, []))[2]
     paths = [None]*(len(archivos))
     for i in range(len(archivos)):
-        old = dirpath + '\\' + archivos[i]
-        newpath = root[0] + '\\' + str(contador).zfill(4) + '.jpg'
-        paths[i] = newpath
-        shutil.copy(old, newpath)
-        print(old + '\n -> \t' +newpath)
-        contador+=1
+        if(archivos[i][-3:] == 'jpg'):
+            old = dirpath + '\\' + archivos[i]
+            newpath = root[0] + '\\' + str(contador).zfill(4) + '.jpg'
+            paths[i] = newpath
+            shutil.copy(old, newpath)
+            print(old + '\n -> \t' +newpath)
+            contador+=1
     allpaths = allpaths + paths
 
 command = 'jpeg2pdf *.jpg -o \"' + sys.argv[1] + '.pdf\"'
